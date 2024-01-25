@@ -1,0 +1,22 @@
+POST http://127.0.0.1:8080/races
+Content-Type: application/json
+
+{
+  "date": "2023-07-31",
+  "number": 1,
+  "name": "Course de Paris",
+  "starters": [
+    {
+      "number": 1,
+      "name": "toto"
+    },
+    {
+      "number": 2,
+      "name": "tata"
+    }
+  ]
+}
+
+<> 2024-01-25T182111.400.json
+###
+
