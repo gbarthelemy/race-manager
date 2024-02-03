@@ -26,10 +26,6 @@ public class RaceService {
     private void validate(Race race) {
         //TODO throw exception if race is not valid
 
-        if (race.starters().size() < 3) {
-            throw new InvalidRaceException("Race should have at least 3 starters");
-        }
-
         if (!hasNoDuplicate(race.starters())) {
             //TODO could be improved by finding what are the duplicates
             throw new InvalidRaceException("Duplicate starter");
