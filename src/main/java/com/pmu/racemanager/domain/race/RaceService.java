@@ -1,5 +1,6 @@
 package com.pmu.racemanager.domain.race;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ public class RaceService {
     private final RaceRepository repository;
     private final RaceProducer producer;
 
+    @Transactional
     public Race create(Race race) {
         validate(race);
 
@@ -24,10 +26,7 @@ public class RaceService {
     }
 
     private void validate(Race race) {
-        //TODO throw exception if race is not valid
-
         if (!hasNoDuplicate(race.starters())) {
-            //TODO could be improved by finding what are the duplicates
             throw new InvalidRaceException("Duplicate starter");
         }
 
