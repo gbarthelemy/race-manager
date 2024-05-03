@@ -23,17 +23,49 @@ class RaceServiceTest {
     //TODO add missing test
     //TODO parameterized test on invalid cases
     @Test
-    void create_should_throw_exception_in_case_of_invalid_input() {
+    void create_should_throw_exception_in_case_of_less_than_3_starters() {
         //given
         var race = new Race(LocalDate.now(), 1, "course 1", Set.of(
                 new Starter(1, "1"),
+                new Starter(2, "2")
+        ));
+
+        //when
+        //then
+        Assertions.assertThatThrownBy(() -> sut.create(race))
+                .hasMessage("Race should have at least 3 starters")
+                .isInstanceOf(InvalidRaceException.class);
+    }
+
+    @Test
+    void create_should_throw_exception_in_case_of_duplicate_starter() {
+        //given
+        var race = new Race(LocalDate.now(), 1, "course 1", Set.of(
+                new Starter(1, "duplicate"),
+                new Starter(2, "duplicate"),
                 new Starter(3, "3")
         ));
 
         //when
         //then
         Assertions.assertThatThrownBy(() -> sut.create(race))
+                .hasMessage("Duplicate starter")
                 .isInstanceOf(InvalidRaceException.class);
+    }
 
+    @Test
+    void create_should_throw_exception_in_case_of_missing_number() {
+        //given
+        var race = new Race(LocalDate.now(), 1, "course 1", Set.of(
+                new Starter(1, "1"),
+                new Starter(3, "3"),
+                new Starter(4, "4")
+        ));
+
+        //when
+        //then
+        Assertions.assertThatThrownBy(() -> sut.create(race))
+                .hasMessage("Starters number are invalid")
+                .isInstanceOf(InvalidRaceException.class);
     }
 }
