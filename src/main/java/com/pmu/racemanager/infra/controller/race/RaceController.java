@@ -1,6 +1,7 @@
 package com.pmu.racemanager.infra.controller.race;
 
 import com.pmu.racemanager.domain.race.RaceService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ public class RaceController {
     private final RaceService service;
 
     @PostMapping
-    public RaceDto post(@RequestBody RaceDto dto) {
+    public RaceDto post(@Valid @RequestBody RaceDto dto) {
         var createdRace = service.create(dto.toDomain());
 
         return RaceDto.fromDomain(createdRace);

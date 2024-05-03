@@ -1,4 +1,4 @@
-mysql_data
-build
-.gradle
-.idea
+.gradle/
+.idea/
+build/
+mysql_data/
